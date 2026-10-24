@@ -1,0 +1,8 @@
+{
+  "name": "xgs",
+  "version": "1.0.0",
+  "description": "XGS (Armor Piercing) for Grok Build — 小怪兽 operating frame injection, refusal recovery and wake acknowledgement, delivered through Grok hooks.",
+  "author": { "name": "Rosen" },
+  "homepage": "https://github.com/RosenFFF/grok-build-XGS",
+  "keywords": ["xgs", "armor-piercing", "frame", "persona", "hooks", "小怪兽"]
+}
