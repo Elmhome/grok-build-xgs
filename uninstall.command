@@ -74,3 +74,7 @@ try {
   process.exitCode = 1;
 }
 JS
+
+# Remove the frame from Grok's global rules file. Everything outside the XGS markers is
+# left exactly as it was; the file is deleted only when the block was all it held.
+"$NODE" "$ROOT/scripts/agents.cjs" uninstall

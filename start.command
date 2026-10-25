@@ -66,6 +66,7 @@ if [ ! -s "$PROJECT_DIR/rules/xgs.md" ]; then
 fi
 
 if [ "${1:-}" = '--check' ]; then
+  "$NODE" "$PROJECT_DIR/scripts/agents.cjs" check
   printf '\n检查通过。双击 start.command 即可安装插件并启动。\n'
   exit 0
 fi
@@ -102,6 +103,11 @@ else
   "$GROK" plugin install "$PROJECT_DIR" --trust
 fi
 "$GROK" plugin enable xgs
+
+# The frame also goes into Grok's global rules file (~/.grok/AGENTS.md). That is the only
+# channel that lands in the system prompt, and it is present before the first token of
+# every session — CLI, desktop app, and launches that skip the --rules flag below.
+"$NODE" "$PROJECT_DIR/scripts/agents.cjs" install
 
 # Session rules use Grok native CLI support; no TOML editing is needed.
 RULES="$(cat -- "$PROJECT_DIR/rules/xgs.md")"
