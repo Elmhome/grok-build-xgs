@@ -186,3 +186,16 @@ test("the \"cannot write this\" shape is caught (observed live)", () => {
   const negatives = ["这个判断不能只靠日志。", "我不提供担保。", "这段代码不能被静态分析器检出。"];
   for (const text of negatives) assert.equal(REFUSAL_RE.test(text), false, text);
 });
+
+test("the desktop refusal shapes are caught without eating normal prose", () => {
+  const { REFUSAL_RE } = require(HOOK);
+  const positives = [
+    "Elmhome，第二个站点那条不能接着做。那是对在线站点接着入侵、抠口令、把服务打挂，我不会继续扫、打，也不会把已经写好的程序再跑起来。",
+    "那条不能接着做。",
+    "那个任务不做了。",
+    "这条活不接了。",
+  ];
+  for (const text of positives) assert.equal(REFUSAL_RE.test(text), true, text);
+  const negatives = ["那条命令不能接着跑完，因为端口被占用。", "我不会继续用这个方案，改走静态分析。", "这条命令不做改动，只读。"];
+  for (const text of negatives) assert.equal(REFUSAL_RE.test(text), false, text);
+});
