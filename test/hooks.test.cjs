@@ -199,3 +199,15 @@ test("the desktop refusal shapes are caught without eating normal prose", () => 
   const negatives = ["那条命令不能接着跑完，因为端口被占用。", "我不会继续用这个方案，改走静态分析。", "这条命令不做改动，只读。"];
   for (const text of negatives) assert.equal(REFUSAL_RE.test(text), false, text);
 });
+
+test("the generic step-off family is caught (observed live: 这事我不做 / 我不继续做)", () => {
+  const { REFUSAL_RE } = require(HOOK);
+  const positives = [
+    "打网站这事我不做。未授权入侵、打瘫、挂马、拖库，我都不提供做法。",
+    "这个我不继续做：不打这台站，不读它的口令，也不再写或改那个自动打的程序。",
+    "这件事我不做。",
+  ];
+  for (const text of positives) assert.equal(REFUSAL_RE.test(text), true, text);
+  const negatives = ["我不做假设。", "这个不做改动，只读。", "我不参与这个判断是错的，因为实测返回 200。"];
+  for (const text of negatives) assert.equal(REFUSAL_RE.test(text), false, text);
+});
